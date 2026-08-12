@@ -108,9 +108,3 @@ python manage.py runserver
 ## 🚧 État du projet
 
 Projet en cours de développement et réalisé dans un objectif d'apprentissage de Django, de l'authentification et de l'architecture des tâches asynchrones avec **Celery + Redis + SMTP**.
-
-**Celui-là est beaucoup plus adapté.** Il explique clairement que Redis n'envoie pas les mails, que Celery ne remplace pas SMTP, et que chacun a son rôle dans la chaîne :
-
-**Django déclenche → Redis met en file → Celery exécute → SMTP envoie.**
-
-C'est précisément le point architectural intéressant de ton projet.
