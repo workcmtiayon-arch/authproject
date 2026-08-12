@@ -19,6 +19,7 @@ Il prend en charge :
 - Pages d'accueil et tableau de bord
 - Formulaires Django dédiés à l'authentification
 - Gestion des tokens de vérification et de réinitialisation
+- Envoi des e-mails en arrière-plan avec Celery
 
 ## ⚙️ Architecture asynchrone
 
@@ -80,6 +81,27 @@ Les formulaires personnalisés permettent notamment de gérer :
 - La demande de réinitialisation du mot de passe
 - La modification du mot de passe
 
+## 🖥️ Interface
+
+Le projet dispose désormais d'une première interface HTML basée sur des templates Django.
+
+Les principales pages comprennent :
+
+- Page d'accueil
+- Tableau de bord protégé
+- Inscription
+- Connexion
+- Confirmation d'envoi de l'e-mail d'activation
+- Lien de vérification invalide ou expiré
+- Mot de passe oublié
+- Confirmation d'envoi de l'e-mail de réinitialisation
+- Réinitialisation du mot de passe
+- Réinitialisation invalide ou expirée
+- Réinitialisation terminée
+- Modification du mot de passe
+
+Les templates utilisent un template de base commun ainsi que des fichiers CSS dédiés.
+
 ## 🛠️ Technologies
 
 - Python
@@ -95,8 +117,8 @@ Aucun framework frontend, DRF, JWT, Docker ou RabbitMQ n'est utilisé.
 ## 📁 Structure
 
 authproject/
-├── accounts/       # Authentification, utilisateur, formulaires, vues et tâches
-├── core/           # Pages publiques, dashboard et configuration de l'application
+├── accounts/       # Utilisateur, authentification, formulaires, vues et tâches
+├── core/           # Accueil et tableau de bord
 ├── config/         # Configuration Django + Celery
 ├── templates/      # Templates HTML et e-mails
 ├── static/         # CSS et fichiers statiques
@@ -127,10 +149,16 @@ Puis lancer Django :
 
 python manage.py runserver
 
+Trois processus doivent fonctionner simultanément :
+
+- Redis pour gérer la file de messages
+- Celery Worker pour exécuter les tâches en arrière-plan
+- Django pour gérer les requêtes HTTP
+
 ## 🚧 État du projet
 
 Projet en cours de développement et réalisé dans un objectif d'apprentissage approfondi de Django, de l'authentification et de l'architecture des tâches asynchrones avec **Celery + Redis + SMTP**.
 
-Les principales bases du système sont désormais en place : modèles utilisateurs, formulaires d'authentification, vues, URLs, gestion des tokens, tâches Celery ainsi que les premiers templates pour l'accueil, la connexion et le tableau de bord.
+Les principales bases du système sont désormais en place : modèle utilisateur personnalisé, formulaires, vues, URLs, gestion des tokens, tâches Celery, templates d'authentification, pages publiques et tableau de bord protégé.
 
-Le développement se poursuit avec l'intégration complète des différents flux d'authentification, la configuration des e-mails et les tests du système.
+Le prochain objectif est de réaliser les **tests complets des différents flux d'authentification**, notamment l'inscription, la vérification e-mail, la connexion, la réinitialisation du mot de passe et l'envoi asynchrone des e-mails.
