@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Tableau de bord{% endblock %}
+{% block content %}
+<section class="dashboard-mock">
+    <h1>Tableau de bord</h1>
+    <p class="mock-warning">
+        Cet espace est une <strong>maquette visuelle</strong> représentant un futur espace
+        utilisateur. Seule la déconnexion (en haut de page) est réellement fonctionnelle
+    </p>
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <h2>Mon profil</h2>
+            <p>Nom d'utilisateur&nbsp;: {{ user.username }}</p>
+            <p>Adresse e-mail&nbsp;: {{ user.email }}</p>
+        </div>
+        <div class="dashboard-card">
+            <h2>Activité récente</h2>
+            <p class="placeholder">Aucune donnée réelle — maquette uniquement.</p>
+        </div>
+        <div class="dashboard-card">
+            <h2>Notifications</h2>
+            <p class="placeholder">Aucune donnée réelle — maquette uniquement.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

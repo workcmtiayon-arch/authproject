@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Accueil{% endblock %}
+{% block content %}
+<section class="hero">
+    <h1>Bienvenue sur AuthProject</h1>
+    <p>Un module d'authentification Django générique, réutilisable et maintenable.</p>
+    {% if not user.is_authenticated %}
+    <div class="hero-actions">
+        <a href="{% url 'accounts:register' %}" class="btn">Créer un compte</a>
+        <a href="{% url 'accounts:login' %}" class="btn btn-secondary">Se connecter</a>
+    </div>
+    {% else %}
+    <div class="hero-actions">
+        <a href="{% url 'core:dashboard' %}" class="btn">Accéder au tableau de bord</a>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}
