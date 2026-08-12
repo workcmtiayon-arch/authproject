@@ -1,0 +1,7 @@
+Bonjour {{ username }},
+Merci de vous être inscrit sur AuthProject.
+Pour activer votre compte, cliquez sur le lien ci-dessous :
+{{ activation_link }}
+Si vous n'êtes pas à l'origine de cette inscription, ignorez simplement cet e-mail.
+--
+L'équipe AuthProject

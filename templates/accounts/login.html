@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Connexion{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">{% endblock %}
+{% block content %}
+<div class="auth-card">
+    <h1>Se connecter</h1>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-field">
+            {{ field.label_tag }}
+            {{ field }}
+            {% for error in field.errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+        </div>
+        {% endfor %}
+        {% for error in form.non_field_errors %}<p class="field-error">{{ error }}</p>{% endfor %}
+        <button type="submit" class="btn btn-full">Se connecter</button>
+    </form>
+    <p class="auth-alt-link">
+        <a href="{% url 'accounts:password-reset' %}">Mot de passe oublié ?</a>
+    </p>
+    <p class="auth-alt-link">
+        Pas encore de compte ? <a href="{% url 'accounts:register' %}">S'inscrire</a>
+    </p>
+</div>
+{% endblock %}

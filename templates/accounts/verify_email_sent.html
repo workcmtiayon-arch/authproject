@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Vérifiez votre e-mail{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">{% endblock %}
+{% block content %}
+<div class="auth-card auth-card-info">
+    <h1>Vérifiez votre boîte e-mail</h1>
+    <p>
+        Un e-mail de confirmation a été envoyé à <strong>{{ email }}</strong>.
+        Cliquez sur le lien qu'il contient pour activer votre compte.
+    </p>
+    <p class="field-help">
+        L'e-mail est envoyé en arrière-plan : son arrivée peut prendre quelques
+        secondes selon la charge du serveur.
+    </p>
+    <a href="{% url 'accounts:login' %}" class="btn">Retour à la connexion</a>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Lien invalide{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">{% endblock %}
+{% block content %}
+<div class="auth-card auth-card-error">
+    <h1>Lien invalide ou expiré</h1>
+    <p>Ce lien de confirmation n'est plus valide. Il a peut-être déjà été utilisé.</p>
+    <a href="{% url 'accounts:login' %}" class="btn">Retour à la connexion</a>
+</div>
+{% endblock %}
