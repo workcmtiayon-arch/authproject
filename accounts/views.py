@@ -87,13 +87,14 @@ class ResetPasswordConfirmView(View):
     def _get_user(self, uidb64):
         try:
             uid = force_str(urlsafe_base64_decode(uidb64))
+            return User.objects.get(pk=uid)
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             return None
 
     def get(self, request, uidb64, token):
         user = self._get_user(uidb64)
         if user is None or not default_token_generator.check_token(user, token):
-            return render(request, "accounts/reset_password_confirm_invalid.html")
+            return render(request, "accounts/reset_password_invalid.html")
 
         form = SetPasswordForm(user)
         return render(request, "accounts/reset_password_confirm.html", {"form":form})
@@ -106,7 +107,8 @@ class ResetPasswordConfirmView(View):
         form = SetPasswordForm(user, request.POST)
         if form.is_valid():
             form.save()
-            return redirect(request, "accounts/reset_password_confirm.html", {"form": form})
+            return redirect("accounts:password-reset-complete")
+        return render(request, "accounts/reset_password_confirm.html", {"form": form})
 
 class ResetPasswordCompleteView(TemplateView):
     template_name = "accounts/reset_password_complete.html"
